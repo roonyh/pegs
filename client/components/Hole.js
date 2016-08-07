@@ -46,7 +46,7 @@ styles.emptyInside = {
   display: 'none',
 }
 
-const Hole = ({hole, selected, locked}) => {
+const Hole = ({hole, selected, locked, onKeyDown}) => {
   let ws = selected ? styles.selectedWrapper : styles.wrapper;
   ws = selected && locked ? styles.lockedWrapper : ws;
   let is = selected && locked ? styles.lockedInside : styles.inside;

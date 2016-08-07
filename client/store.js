@@ -17,9 +17,13 @@ const defaultState = {
   game: {
     board,
     selected: {x:3, y:3},
-    locked: false
+    locked: false,
+    gameOver: false,
   }
 };
 
 const store = createStore(rootReducer, defaultState, window.devToolsExtension && window.devToolsExtension());
+
 export default store;
+
+export { defaultState };

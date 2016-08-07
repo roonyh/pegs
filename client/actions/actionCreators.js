@@ -29,3 +29,9 @@ export function lock() {
   }
 }
 
+export function reset() {
+  return {
+    type: 'RESET',
+  }
+}
+

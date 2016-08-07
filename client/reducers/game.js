@@ -1,3 +1,13 @@
+import {
+  isValidUpCut,
+  isValidDownCut,
+  isValidLeftCut,
+  isValidRightCut,
+  isGameOver,
+} from '../rules'
+
+import environment from './environment'
+
 function game(state={board:[], selected: {x:3, y:3}, locked: false}, action){
   const {x, y} = state.selected;
   const { board, locked } = state;
@@ -11,24 +21,20 @@ function game(state={board:[], selected: {x:3, y:3}, locked: false}, action){
 
     case 'MOVE_UP' :
       // Check if cutting
-      if(locked){
-        if(y-2 >= minY){
-          console.log('limits up');
-          // If the cutting up is within the board limits
-          if(board[y-1][x] == 'P' && board[y-2][x] == 'E'){
-            // If its going over a peg and landing on an empty hole
-            // This is a valid cut
-            const newBoard = [...board];
-            newBoard[y][x] = 'E';
-            newBoard[y-1][x] = 'E';
-            newBoard[y-2][x] = 'P';
+      if(locked && isValidUpCut(x, y, board)){
+        // This is a valid cut
+        const newBoard = [...board];
+        newBoard[y][x] = 'E';
+        newBoard[y-1][x] = 'E';
+        newBoard[y-2][x] = 'P';
 
-            return {
-              board: newBoard,
-              selected: {x: x, y: y-2},
-              locked: false,
-            }
-          }
+        const gameOver = isGameOver(board);
+
+        return {
+          board: newBoard,
+          selected: {x: x, y: y-2},
+          locked: false,
+          gameOver
         }
       }
 
@@ -43,27 +49,23 @@ function game(state={board:[], selected: {x:3, y:3}, locked: false}, action){
 
     case 'MOVE_DOWN' :
     // Check if cutting
-      if(locked){
-        if(y+2 <= maxY){
-          // If the cutting down is within the board limits
-          if(board[y+1][x] == 'P' && board[y+2][x] == 'E'){
-            console.log('done');
-            // If its going over a peg and landing on an empty hole
-            // This is a valid cut
-            const newBoard = [...board];
-            newBoard[y][x] = 'E';
-            newBoard[y+1][x] = 'E';
-            newBoard[y+2][x] = 'P';
+      if(locked && isValidDownCut(x, y, board)){
+        // If its going over a peg and landing on an empty hole
+        // This is a valid cut
+        const newBoard = [...board];
+        newBoard[y][x] = 'E';
+        newBoard[y+1][x] = 'E';
+        newBoard[y+2][x] = 'P';
 
-            return {
-              board: newBoard,
-              selected: {x: x, y: y+2},
-              locked: false,
-            }
-          }
+        const gameOver = isGameOver(board);
+
+        return {
+          board: newBoard,
+          selected: {x: x, y: y+2},
+          locked: false,
+          gameOver
         }
       }
-
 
       newY = y+1 > maxY ? minY : y+1
 
@@ -75,23 +77,21 @@ function game(state={board:[], selected: {x:3, y:3}, locked: false}, action){
 
     case 'MOVE_RIGHT' :
       // Check if cutting
-      if(locked){
-        if(x+2 <= maxX){
-          // If the cutting up is within the board limits
-          if(board[y][x+1] == 'P' && board[y][x+2] == 'E'){
-            // If its going over a peg and landing on an empty hole
-            // This is a valid cut
-            const newBoard = [...board];
-            newBoard[y][x] = 'E';
-            newBoard[y][x+1] = 'E';
-            newBoard[y][x+2] = 'P';
+      if(locked && isValidRightCut(x, y, board)){
+        // If its going over a peg and landing on an empty hole
+        // This is a valid cut
+        const newBoard = [...board];
+        newBoard[y][x] = 'E';
+        newBoard[y][x+1] = 'E';
+        newBoard[y][x+2] = 'P';
 
-            return {
-              board: newBoard,
-              selected: {x: x+2, y: y},
-              locked: false,
-            }
-          }
+        const gameOver = isGameOver(board);
+
+        return {
+          board: newBoard,
+          selected: {x: x+2, y: y},
+          locked: false,
+          gameOver
         }
       }
 
@@ -105,24 +105,21 @@ function game(state={board:[], selected: {x:3, y:3}, locked: false}, action){
 
     case 'MOVE_LEFT':
       // Check if cutting
-      if(locked){
+      if(locked && isValidLeftCut(x, y, board)){
+        // If its going over a peg and landing on an empty hole
+        // This is a valid cut
+        const newBoard = [...board];
+        newBoard[y][x] = 'E';
+        newBoard[y][x-1] = 'E';
+        newBoard[y][x-2] = 'P';
 
-        if(x-2 >= minX){
-          // If the cutting up is within the board limits
-          if(board[y][x-1] == 'P' && board[y][x-2] == 'E'){
-            // If its going over a peg and landing on an empty hole
-            // This is a valid cut
-            const newBoard = [...board];
-            newBoard[y][x] = 'E';
-            newBoard[y][x-1] = 'E';
-            newBoard[y][x-2] = 'P';
+        const gameOver = isGameOver(board);
 
-            return {
-              board: newBoard,
-              selected: {x: x-2, y: y},
-              locked: false,
-            }
-          }
+        return {
+          board: newBoard,
+          selected: {x: x-2, y: y},
+          locked: false,
+          gameOver
         }
       }
 
@@ -141,7 +138,7 @@ function game(state={board:[], selected: {x:3, y:3}, locked: false}, action){
       }
 
     default:
-      return state;
+      return environment(state, action);
   }
 }
 

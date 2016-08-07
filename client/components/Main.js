@@ -1,5 +1,6 @@
 import React from 'react';
 import Board from './Board'
+import GameOver from './GameOver'
 
 export default class Main extends React.Component {
   constructor(props) {
@@ -8,8 +9,6 @@ export default class Main extends React.Component {
   }
 
   onKeyPress(e) {
-    e.preventDefault()
-    console.log(e.key);
     switch (e.key) {
       case "ArrowUp":
         this.props.moveUp();
@@ -24,6 +23,12 @@ export default class Main extends React.Component {
         this.props.moveRight();
         break;
       case " ":
+      console.log(this.props.game.gameOver);
+        if(this.props.game.gameOver){
+          console.log('game over');
+          this.props.reset();
+          break;
+        }
         this.props.lock();
         break;
       default:
@@ -32,9 +37,22 @@ export default class Main extends React.Component {
   }
 
   render() {
+    let info = null;
+    if(this.props.game.gameOver){
+      info = (
+        <GameOver style = {{top: '230px'}}/>
+      )
+    }
+
     return (
-      <div onKeyDown={this._onKeyPress} tabIndex={1}>
+      <div
+        ref={t => {if(t!==null){t.focus()}}}
+        onKeyDown={this._onKeyPress}
+        tabIndex={1}
+        style={{outline: 'none'}}
+      >
         <Board {...this.props} />
+        { info }
       </div>
     )
   }
