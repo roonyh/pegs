@@ -3,19 +3,19 @@ import React from 'react';
 const styles = {
   wrapper: {
     position: 'absolute',
-    width: '98%'
+    width: '99%'
   },
   main: {
     margin: '0 auto',
     top: '50px',
     width: '400px',
     textAlign: 'center',
-    backgroundColor: 'rgba(20, 20, 40, 0.7)',
+    backgroundColor: 'rgba(72, 61, 49, 0.7)',
   },
   text: {
     fontFamily: '"Lucida Sans Unicode", "Lucida Grande", sans-serif',
     padding: "10px",
-    color: 'rgb(145, 135, 175)',
+    color: 'rgb(162, 145, 124)',
   }
 }
 

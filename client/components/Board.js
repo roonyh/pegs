@@ -3,7 +3,6 @@ import Hole from './Hole'
 
 const styles = {
   board: {
-    backgroundColor: 'rgb(20, 20, 40)',
     padding: '15px',
   },
   row: {

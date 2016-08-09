@@ -7,38 +7,40 @@ const styles = {
     height: '80px',
     margin: '0 auto',
     display: 'inline-block',
-    padding: '15px',
+    padding: '16px',
     verticalAlign: 'middle',
-    backgroundColor: 'rgb(75, 75, 115)',
+    backgroundColor: 'rgb(28, 29, 30)',
   },
   inside: {
     boxSizing: 'border-box',
-    width: '50px',
-    height: '50px',
-    lineHeight: '50px',
+    width: '48px',
+    height: '48px',
     verticalAlign: 'middle',
-    backgroundColor: 'rgb(145, 135, 175)',
+    backgroundColor: 'rgb(56, 69, 77)',
     borderRadius: '25px',
+    border: '5px solid rgb(28, 29, 30)',
   }
 }
 
 styles.selectedWrapper = {
   ...styles.wrapper,
-  backgroundColor: 'rgb(70, 20, 20)',
+  backgroundColor: 'rgb(120, 104, 86)',
+  border: '5px solid rgb(28, 29, 30)',
+  padding: '11px',
 }
 
 styles.lockedWrapper = {
   ...styles.wrapper,
-  backgroundColor: 'rgb(70, 20, 20)',
-  border: '5px solid',
-  borderColor: 'rgb(125, 90, 90)',
-  padding: '10px',
+  backgroundColor: 'rgb(120, 104, 86)',
+  border: '0px',
+  padding: '21px',
 }
 
 styles.lockedInside = {
   ...styles.inside,
-  border: '5px solid',
-  borderColor: 'rgb(125, 90, 90)',
+  border: '0px',
+  width: '38px',
+  height: '38px',
 }
 
 styles.emptyInside = {
