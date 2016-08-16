@@ -1,4 +1,5 @@
 import React from 'react'
+import {Motion, spring} from 'react-motion';
 
 const styles = {
   wrapper: {
@@ -12,6 +13,7 @@ const styles = {
     backgroundColor: 'rgb(28, 29, 30)',
   },
   inside: {
+    position: 'relative',
     boxSizing: 'border-box',
     width: '48px',
     height: '48px',
@@ -48,19 +50,37 @@ styles.emptyInside = {
   display: 'none',
 }
 
-const Hole = ({hole, selected, locked, onKeyDown}) => {
+const Hole = ({hole, selected, locked, moved, onKeyDown}) => {
   let ws = selected ? styles.selectedWrapper : styles.wrapper;
   ws = selected && locked ? styles.lockedWrapper : ws;
   let is = selected && locked ? styles.lockedInside : styles.inside;
   is = hole=='E' ? styles.emptyInside : is;
 
+  let peg = (
+    <div style={is}>
+      &nbsp;
+    </div>
+  );
+
+  if(moved) {
+    peg = (
+      <Motion defaultStyle={{x: 160}} style={{x: spring(0)}}>
+        {
+          value => (
+            <div style={{...is, top: value.x}}>
+              &nbsp;
+            </div>
+          )
+        }
+      </Motion>
+    );
+  }
+
   return (
     <div style={ws}>
-      <div style={is}>
-        &nbsp;
-      </div>
+      { peg }
     </div>
-  )
+  );
 }
 
 export default Hole
