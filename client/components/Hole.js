@@ -1,5 +1,5 @@
 import React from 'react'
-import {Motion, spring} from 'react-motion';
+import {StaggeredMotion, spring} from 'react-motion';
 
 const styles = {
   wrapper: {
@@ -62,17 +62,60 @@ const Hole = ({hole, selected, locked, moved, onKeyDown}) => {
     </div>
   );
 
-  if(moved) {
+  if(moved && selected) {
+    const movedStyle = {};
+    const cutStyle = {};
+
+    let propRelative = 'top';
+    switch (moved) {
+      case 'up':
+        propRelative = 'top';
+        cutStyle.top = '32px';
+        break;
+      case 'down':
+        propRelative = 'bottom';
+        cutStyle.bottom = '128px';
+        break;
+      case 'left':
+        propRelative = 'left';
+        cutStyle.bottom = '48px';
+        cutStyle.left = '80px';
+        break;
+      case 'right':
+        propRelative = 'right';
+        cutStyle.bottom = '48px';
+        cutStyle.right = '80px';
+        break;
+      default:
+    }
+
     peg = (
-      <Motion defaultStyle={{x: 160}} style={{x: spring(0)}}>
+      <StaggeredMotion
+        defaultStyles={[{h: 160}, {h: 48}]}
+        styles={prevInterpolatedStyles => prevInterpolatedStyles.map((_, i) => {
+          return i === 0
+            ? {h: spring(0, {stiffness: 300, damping: 27})}
+            : {h: spring(0, {stiffness: 10, damping: 2})}
+        })}>
         {
-          value => (
-            <div style={{...is, top: value.x}}>
-              &nbsp;
-            </div>
-          )
+          interpolatingStyles => {
+            movedStyle[propRelative] = interpolatingStyles[0].h;
+            cutStyle.width = interpolatingStyles[1].h;
+            cutStyle.height = interpolatingStyles[1].h;
+
+            return (
+              <div>
+                <div style={{...is, ...movedStyle}}>
+                  &nbsp;
+                </div>
+                <div style={{...is, ...cutStyle}}>
+                  &nbsp;
+                </div>
+              </div>
+            );
+          }
         }
-      </Motion>
+      </StaggeredMotion>
     );
   }
 

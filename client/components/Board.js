@@ -23,6 +23,7 @@ const Board = ({game}) => (
             hole={ hole }
             selected={ x==game.selected.x && y==game.selected.y }
             locked={ game.locked }
+            moved={ game.moved }
             key={ `hole${x}${y}` }
           />
         )

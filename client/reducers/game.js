@@ -33,6 +33,7 @@ function game(state={board:[], selected: {x:3, y:3}, locked: false}, action){
         return {
           board: newBoard,
           selected: {x: x, y: y-2},
+          moved: 'up',
           locked: false,
           gameOver
         }
@@ -45,6 +46,7 @@ function game(state={board:[], selected: {x:3, y:3}, locked: false}, action){
         ...state,
         selected: {x: x, y: newY},
         locked: false,
+        moved: false,
       }
 
     case 'MOVE_DOWN' :
@@ -62,6 +64,7 @@ function game(state={board:[], selected: {x:3, y:3}, locked: false}, action){
         return {
           board: newBoard,
           selected: {x: x, y: y+2},
+          moved: 'down',
           locked: false,
           gameOver
         }
@@ -73,6 +76,7 @@ function game(state={board:[], selected: {x:3, y:3}, locked: false}, action){
         ...state,
         selected: {x: x, y: newY},
         locked: false,
+        moved: false,
       }
 
     case 'MOVE_RIGHT' :
@@ -90,6 +94,7 @@ function game(state={board:[], selected: {x:3, y:3}, locked: false}, action){
         return {
           board: newBoard,
           selected: {x: x+2, y: y},
+          moved: 'right',
           locked: false,
           gameOver
         }
@@ -101,6 +106,7 @@ function game(state={board:[], selected: {x:3, y:3}, locked: false}, action){
         ...state,
         selected: {x: newX, y: y},
         locked: false,
+        moved: false,
       }
 
     case 'MOVE_LEFT':
@@ -118,6 +124,7 @@ function game(state={board:[], selected: {x:3, y:3}, locked: false}, action){
         return {
           board: newBoard,
           selected: {x: x-2, y: y},
+          moved: 'left',
           locked: false,
           gameOver
         }
@@ -129,6 +136,7 @@ function game(state={board:[], selected: {x:3, y:3}, locked: false}, action){
         ...state,
         selected: {x: newX, y: y},
         locked: false,
+        moved: false,
       }
 
     case 'LOCK':

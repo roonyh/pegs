@@ -23,9 +23,7 @@ export default class Main extends React.Component {
         this.props.moveRight();
         break;
       case " ":
-      console.log(this.props.game.gameOver);
         if(this.props.game.gameOver){
-          console.log('game over');
           this.props.reset();
           break;
         }
