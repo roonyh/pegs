@@ -91,18 +91,17 @@ const Hole = ({hole, selected, locked, moved, onKeyDown}) => {
 
     peg = (
       <StaggeredMotion
-        defaultStyles={[{h: 160}, {h: 48}]}
+        defaultStyles={[{h: 160.0}, {h: 160.0}]}
         styles={prevInterpolatedStyles => prevInterpolatedStyles.map((_, i) => {
           return i === 0
             ? {h: spring(0, {stiffness: 300, damping: 27})}
-            : {h: spring(0, {stiffness: 10, damping: 2})}
+            : {h: spring(prevInterpolatedStyles[i-1].h, {stiffness: 100, damping: 20})}
         })}>
         {
           interpolatingStyles => {
             movedStyle[propRelative] = interpolatingStyles[0].h;
-            cutStyle.width = interpolatingStyles[1].h;
-            cutStyle.height = interpolatingStyles[1].h;
-
+            cutStyle.backgroundColor = `rgba(56, 69, 77, ${interpolatingStyles[1].h/160})`;
+            console.log(interpolatingStyles[1].h);
             return (
               <div>
                 <div style={{...is, ...movedStyle}}>

@@ -4,6 +4,7 @@ import {
   isValidLeftCut,
   isValidRightCut,
   isGameOver,
+  pegCount,
 } from '../rules'
 
 import environment from './environment'
@@ -30,13 +31,19 @@ function game(state={board:[], selected: {x:3, y:3}, locked: false}, action){
 
         const gameOver = isGameOver(board);
 
-        return {
+        const newState = {
           board: newBoard,
           selected: {x: x, y: y-2},
           moved: 'up',
           locked: false,
           gameOver
         }
+
+        if(gameOver){
+          newState.pegCount = pegCount(board)
+        }
+
+        return newState;
       }
 
       // Not cutting
@@ -61,13 +68,19 @@ function game(state={board:[], selected: {x:3, y:3}, locked: false}, action){
 
         const gameOver = isGameOver(board);
 
-        return {
+        const newState = {
           board: newBoard,
           selected: {x: x, y: y+2},
           moved: 'down',
           locked: false,
           gameOver
         }
+
+        if(gameOver){
+          newState.pegCount = pegCount(board)
+        }
+
+        return newState;
       }
 
       newY = y+1 > maxY ? minY : y+1
@@ -91,13 +104,19 @@ function game(state={board:[], selected: {x:3, y:3}, locked: false}, action){
 
         const gameOver = isGameOver(board);
 
-        return {
+        const newState = {
           board: newBoard,
           selected: {x: x+2, y: y},
           moved: 'right',
           locked: false,
           gameOver
         }
+
+        if(gameOver){
+          newState.pegCount = pegCount(board)
+        }
+
+        return newState;
       }
 
       newX = x+1 > maxX ? minX : x+1
@@ -121,13 +140,19 @@ function game(state={board:[], selected: {x:3, y:3}, locked: false}, action){
 
         const gameOver = isGameOver(board);
 
-        return {
+        const newState = {
           board: newBoard,
           selected: {x: x-2, y: y},
           moved: 'left',
           locked: false,
           gameOver
         }
+
+        if(gameOver){
+          newState.pegCount = pegCount(board)
+        }
+
+        return newState;
       }
 
       newX = x-1 < minX ? maxX : x-1

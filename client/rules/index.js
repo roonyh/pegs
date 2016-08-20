@@ -50,3 +50,16 @@ export function isGameOver(board){
 
   return true;
 }
+
+export function pegCount(board){
+  let count = 0;
+  for(let i = 0; i<board.length; i++){
+    let row = board[i]
+    for(let j=0; j<row.length; j++){
+      if(board[i][j] === 'P') {
+        count++;
+      }
+    }
+  }
+  return count;
+}
