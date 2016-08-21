@@ -1,7 +1,6 @@
-import { createStore, compse } from 'redux';
-
-// import the root reducer
+import { createStore, compose } from 'redux';
 import rootReducer from './reducers/index';
+import persistState from 'redux-localstorage'
 
 const board = [
   ['X', 'X', 'P', 'P', 'P', 'X', 'X'],
@@ -22,8 +21,11 @@ const defaultState = {
   }
 };
 
-const store = createStore(rootReducer, defaultState, window.devToolsExtension && window.devToolsExtension());
+const enhancer = compose(
+  persistState(),
+  window.devToolsExtension && window.devToolsExtension()
+)
+const store = createStore(rootReducer, defaultState, enhancer);
 
 export default store;
-
 export { defaultState };

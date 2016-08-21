@@ -101,7 +101,6 @@ const Hole = ({hole, selected, locked, moved, onKeyDown}) => {
           interpolatingStyles => {
             movedStyle[propRelative] = interpolatingStyles[0].h;
             cutStyle.backgroundColor = `rgba(56, 69, 77, ${interpolatingStyles[1].h/160})`;
-            console.log(interpolatingStyles[1].h);
             return (
               <div>
                 <div style={{...is, ...movedStyle}}>

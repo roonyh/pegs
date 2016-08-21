@@ -1,3 +1,5 @@
+import { ActionCreators } from 'redux-undo';
+
 // moves
 export function moveUp() {
   return {
@@ -35,3 +37,6 @@ export function reset() {
   }
 }
 
+const { undo, redo } = ActionCreators;
+
+export { undo, redo }

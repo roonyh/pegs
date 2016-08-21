@@ -24,12 +24,30 @@ function game(state={board:[], selected: {x:3, y:3}, locked: false}, action){
       // Check if cutting
       if(locked && isValidUpCut(x, y, board)){
         // This is a valid cut
-        const newBoard = [...board];
-        newBoard[y][x] = 'E';
-        newBoard[y-1][x] = 'E';
-        newBoard[y-2][x] = 'P';
+        const newRow1 = [
+          ...board[y-2].slice(0, x),
+          'P',
+          ...board[y-2].slice(x+1),
+        ]
+        const newRow2 = [
+          ...board[y-1].slice(0, x),
+          'E',
+          ...board[y-1].slice(x+1),
+        ]
+        const newRow3 = [
+          ...board[y].slice(0, x),
+          'E',
+          ...board[y].slice(x+1),
+        ]
+        const newBoard = [
+          ...board.slice(0, y-2),
+          newRow1,
+          newRow2,
+          newRow3,
+          ...board.slice(y+1),
+        ]
 
-        const gameOver = isGameOver(board);
+        const gameOver = isGameOver(newBoard);
 
         const newState = {
           board: newBoard,
@@ -40,7 +58,7 @@ function game(state={board:[], selected: {x:3, y:3}, locked: false}, action){
         }
 
         if(gameOver){
-          newState.pegCount = pegCount(board)
+          newState.pegCount = pegCount(newBoard)
         }
 
         return newState;
@@ -61,12 +79,30 @@ function game(state={board:[], selected: {x:3, y:3}, locked: false}, action){
       if(locked && isValidDownCut(x, y, board)){
         // If its going over a peg and landing on an empty hole
         // This is a valid cut
-        const newBoard = [...board];
-        newBoard[y][x] = 'E';
-        newBoard[y+1][x] = 'E';
-        newBoard[y+2][x] = 'P';
+        const newRow1 = [
+          ...board[y].slice(0, x),
+          'E',
+          ...board[y].slice(x+1),
+        ]
+        const newRow2 = [
+          ...board[y+1].slice(0, x),
+          'E',
+          ...board[y+1].slice(x+1),
+        ]
+        const newRow3 = [
+          ...board[y+2].slice(0, x),
+          'P',
+          ...board[y+2].slice(x+1),
+        ]
+        const newBoard = [
+          ...board.slice(0, y),
+          newRow1,
+          newRow2,
+          newRow3,
+          ...board.slice(y+3),
+        ]
 
-        const gameOver = isGameOver(board);
+        const gameOver = isGameOver(newBoard);
 
         const newState = {
           board: newBoard,
@@ -77,7 +113,7 @@ function game(state={board:[], selected: {x:3, y:3}, locked: false}, action){
         }
 
         if(gameOver){
-          newState.pegCount = pegCount(board)
+          newState.pegCount = pegCount(newBoard)
         }
 
         return newState;
@@ -97,12 +133,18 @@ function game(state={board:[], selected: {x:3, y:3}, locked: false}, action){
       if(locked && isValidRightCut(x, y, board)){
         // If its going over a peg and landing on an empty hole
         // This is a valid cut
-        const newBoard = [...board];
-        newBoard[y][x] = 'E';
-        newBoard[y][x+1] = 'E';
-        newBoard[y][x+2] = 'P';
+        const newRow = [
+          ...board[y].slice(0, x),
+          'E', 'E', 'P',
+          ...board[y].slice(x+3),
+        ]
+        const newBoard = [
+          ...board.slice(0, y),
+          newRow,
+          ...board.slice(y+1),
+        ]
 
-        const gameOver = isGameOver(board);
+        const gameOver = isGameOver(newBoard);
 
         const newState = {
           board: newBoard,
@@ -113,7 +155,7 @@ function game(state={board:[], selected: {x:3, y:3}, locked: false}, action){
         }
 
         if(gameOver){
-          newState.pegCount = pegCount(board)
+          newState.pegCount = pegCount(newBoard)
         }
 
         return newState;
@@ -133,12 +175,18 @@ function game(state={board:[], selected: {x:3, y:3}, locked: false}, action){
       if(locked && isValidLeftCut(x, y, board)){
         // If its going over a peg and landing on an empty hole
         // This is a valid cut
-        const newBoard = [...board];
-        newBoard[y][x] = 'E';
-        newBoard[y][x-1] = 'E';
-        newBoard[y][x-2] = 'P';
+        const newRow = [
+          ...board[y].slice(0, x-2),
+          'P', 'E', 'E',
+          ...board[y].slice(x+1),
+        ]
+        const newBoard = [
+          ...board.slice(0, y),
+          newRow,
+          ...board.slice(y+1),
+        ]
 
-        const gameOver = isGameOver(board);
+        const gameOver = isGameOver(newBoard);
 
         const newState = {
           board: newBoard,
@@ -149,7 +197,7 @@ function game(state={board:[], selected: {x:3, y:3}, locked: false}, action){
         }
 
         if(gameOver){
-          newState.pegCount = pegCount(board)
+          newState.pegCount = pegCount(newBoard)
         }
 
         return newState;

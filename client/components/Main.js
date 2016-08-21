@@ -36,6 +36,24 @@ export default class Main extends React.Component {
         }
         this.props.lock();
         break;
+      case "r":
+        if(!(e.altKey || e.ctrlKey || e.metaKey || e.shiftKey)){
+          e.preventDefault();
+          this.props.reset();
+        }
+        break;
+      case "z":
+        if(!(e.altKey || e.ctrlKey || e.metaKey || e.shiftKey)){
+          e.preventDefault();
+          this.props.undo();
+        }
+        break;
+      case "a":
+        if(!(e.altKey || e.ctrlKey || e.metaKey || e.shiftKey)){
+          e.preventDefault();
+          this.props.redo();
+        }
+        break;
       default:
 
     }
