@@ -4,7 +4,7 @@ import GameOver from '../components/GameOver';
 
 storiesOf('Game Over', module)
   .add('you lost', () => (
-    <div style={{width: "400px"}}>
+    <div style={{width: "400px", backgroundColor:"#eee"}}>
      <GameOver remaining={7} />
     </div>
   ))

@@ -24,7 +24,7 @@ export default () => (
     <div style={styles.header}>How to play</div>
     <div style={styles.body}>
       To remove a peg, jump over it with another peg.<br />
-      Can only jump up, down left or right. No diagonal jumps.
+      Can only jump up, down, left or right. No diagonal jumps.
     </div>
     <div style={styles.header}>Controls</div>
     <div style={styles.body}>
