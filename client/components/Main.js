@@ -60,12 +60,7 @@ export default class Main extends React.Component {
   }
 
   render() {
-    let info = null;
-    if(this.props.game.gameOver){
-      info = (
-        <GameOver remaining={this.props.game.pegCount} style={{top: '330px'}}/>
-      )
-    }
+    const display = this.props.game.gameOver ? 'block' : 'none';
 
     return (
       <div
@@ -77,7 +72,7 @@ export default class Main extends React.Component {
         <Header />
         <br />
         <Board {...this.props} />
-        { info }
+          <GameOver remaining={this.props.game.pegCount} style={{top: '315px', display}}/>
         <Info />
       </div>
     )

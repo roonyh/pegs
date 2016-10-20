@@ -11,6 +11,7 @@ const styles = {
     width: '400px',
     textAlign: 'center',
     backgroundColor: 'rgba(72, 61, 49, 0.7)',
+    paddingBottom: '15px',
   },
   text: {
     fontFamily: '"Lucida Sans Unicode", "Lucida Grande", sans-serif',
@@ -45,6 +46,20 @@ export default class GameOver extends React.Component {
         <div style={styles.main}>
           <div style={styles.gameOver}>Game Over!</div>
           { info }
+          <div
+            className="fb-share-button"
+            data-href="https://roonyh.github.io/pegs/"
+            data-layout="button" data-size="large"
+            data-mobile-iframe="true"
+          >
+            <a
+              className="fb-xfbml-parse-ignore"
+              target="_blank"
+              href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Froonyh.github.io%2Fpegs%2F&amp;src=sdkpreparse"
+            >
+              Share
+            </a>
+          </div>
         </div>
       </div>
     )
