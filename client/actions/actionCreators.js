@@ -25,9 +25,25 @@ export function moveRight() {
   }
 }
 
+export function moveTo(x, y) {
+  return {
+    type: 'MOVE_TO',
+    x,
+    y,
+  }
+}
+
 export function lock() {
   return {
     type: 'LOCK',
+  }
+}
+
+export function lockAt(x, y) {
+  return {
+    type: 'LOCK_AT',
+    x,
+    y,
   }
 }
 

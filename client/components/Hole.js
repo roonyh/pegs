@@ -50,14 +50,14 @@ styles.emptyInside = {
   display: 'none',
 }
 
-const Hole = ({hole, selected, locked, moved, onKeyDown}) => {
+const Hole = ({hole, selected, locked, moved, onPegClick, onHoleClick}) => {
   let ws = selected ? styles.selectedWrapper : styles.wrapper;
   ws = selected && locked ? styles.lockedWrapper : ws;
   let is = selected && locked ? styles.lockedInside : styles.inside;
   is = hole=='E' ? styles.emptyInside : is;
 
   let peg = (
-    <div style={is}>
+    <div style={is} onClick={onPegClick}>
       &nbsp;
     </div>
   );
@@ -103,7 +103,7 @@ const Hole = ({hole, selected, locked, moved, onKeyDown}) => {
             cutStyle.backgroundColor = `rgba(56, 69, 77, ${interpolatingStyles[1].h/160})`;
             return (
               <div>
-                <div style={{...is, ...movedStyle}}>
+                <div style={{...is, ...movedStyle}} onClick={onPegClick}>
                   &nbsp;
                 </div>
                 <div style={{...is, ...cutStyle}}>
@@ -118,7 +118,7 @@ const Hole = ({hole, selected, locked, moved, onKeyDown}) => {
   }
 
   return (
-    <div style={ws}>
+    <div style={ws} onClick={onHoleClick}>
       { peg }
     </div>
   );

@@ -11,7 +11,7 @@ const styles = {
   }
 }
 
-const Board = ({game}) => (
+const Board = ({game, lockAt, moveTo}) => (
   <div style={styles.board}>
   {
     game.board.map((row, y) => (
@@ -25,6 +25,8 @@ const Board = ({game}) => (
             locked={ game.locked }
             moved={ game.moved }
             key={ `hole${x}${y}` }
+            onPegClick={ e => {e.stopPropagation(); lockAt(x, y) }}
+            onHoleClick={ e => {e.stopPropagation(); moveTo(x, y) }}
           />
         )
       ))

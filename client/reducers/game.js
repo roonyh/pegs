@@ -212,10 +212,38 @@ function game(state={board:[], selected: {x:3, y:3}, locked: false}, action){
         moved: false,
       }
 
+    case 'MOVE_TO':
+      if(y - action.y === 2 && x === action.x) {
+        return game(state, {type: 'MOVE_UP'})
+      }
+      if(y - action.y === -2 && x === action.x) {
+        return game(state, {type: 'MOVE_DOWN'})
+      }
+      if(x - action.x === 2 && y === action.y) {
+        return game(state, {type: 'MOVE_LEFT'})
+      }
+      if(x - action.x === -2 && y === action.y) {
+        return game(state, {type: 'MOVE_RIGHT'})
+      }
+      return {
+        ...state,
+        selected: {x: action.x, y: action.y},
+        locked: false,
+        moved: false,
+      }
+
     case 'LOCK':
       return {
         ...state,
         locked: !state.locked,
+      }
+
+    case 'LOCK_AT':
+      return {
+        ...state,
+        selected: {x: action.x, y: action.y},
+        locked: true,
+        moved: false,
       }
 
     default:

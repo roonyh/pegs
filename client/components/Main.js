@@ -72,7 +72,7 @@ export default class Main extends React.Component {
         <Header />
         <br />
         <Board {...this.props} />
-          <GameOver remaining={this.props.game.pegCount} style={{top: '315px', display}}/>
+        <GameOver remaining={this.props.game.pegCount} style={{top: '315px', display}}/>
         <Info />
       </div>
     )
