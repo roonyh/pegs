@@ -22,8 +22,7 @@ const defaultState = {
 };
 
 const enhancer = compose(
-  persistState(),
-  window.devToolsExtension && window.devToolsExtension()
+  persistState()
 )
 const store = createStore(rootReducer, defaultState, enhancer);
 
