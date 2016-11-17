@@ -46,7 +46,7 @@ export default class GameOver extends React.Component {
         <div style={styles.main}>
           <div style={styles.gameOver}>Game Over!</div>
           { info }
-          <iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Froonyh.github.io%2Fpegs%2F&layout=button_count&size=small&mobile_iframe=true&appId=1591263741108585&width=69&height=20" width="69" height="20" style={{border:'none', overflow:'hidden'}} scrolling="no" frameBorder="0" allowTransparency="true"></iframe>
+          <iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Froonyh.github.io%2Fpegs%2F&layout=button_count&size=small&mobile_iframe=true&appId=1763895600529251&width=69&height=20" width="88" height="20" style={{border:'none', overflow:'hidden'}} scrolling="no" frameBorder="0" allowTransparency="true"></iframe>
         </div>
       </div>
     )
